@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Menciptakan Database</title>
+  <title>Menciptakan Tabel</title>
 </head>
 
 <body>
@@ -10,11 +10,16 @@
 error_reporting(0);
 require_once './koneksi.php';
 
-$db = 'myweb';
+$sql = 'CREATE TABLE mahasiswa ( 
+        nim VARCHAR(12) NOT NULL,
+        nama VARCHAR(40) NOT NULL,
+        alamat VARCHAR(100),
+        PRIMARY KEY (nim)
+        ) ENGINE=MyISAM;';
 
-$res = mysql_query('CREATE DATABASE ' . $db);
+$res = mysql_query($sql);
 if ($res) {
-  echo 'Database ' .$db. ' Created';
+  echo 'Tabel Created';
   mysql_close($res);
 } else {
   echo mysql_error();
@@ -24,4 +29,4 @@ if ($res) {
 
 </body>
 </html> 
-
+ 
