@@ -59,12 +59,13 @@ $objPHPExcel->setActiveSheetIndex(0)
             ->setCellValue('B1', 'NIM')
             ->setCellValue('C1', 'Nama')
             ->setCellValue('D1', 'Alamat')
+			->setCellValue('D1', 'Kode Prodi')
 			->setCellValue('E1', 'Prodi');
 
 mysql_connect('localhost','root','');
 mysql_select_db('myweb');
 
-$sql = mysql_query("select * from mahasiswa, prodi, relasi WHERE mahasiswa.nim = relasi.nim AND relasi.kode_prodi = prodi.kode_prodi");
+$sql = mysql_query("select * from mahasiswa, prodi, add_prodi WHERE mahasiswa.nim = add_prodi.nim AND add_prodi.kode_prodi = prodi.kode_prodi");
 $no = 1;
 while($row = @mysql_fetch_array($sql)){
     $objPHPExcel->setActiveSheetIndex(0)
@@ -72,6 +73,7 @@ while($row = @mysql_fetch_array($sql)){
                 ->setCellValue('B'.($no+1), $row['nim'])
                 ->setCellValue('C'.($no+1), $row['nama'])
                 ->setCellValue('D'.($no+1), $row['alamat'])
+				->setCellValue('D'.($no+1), $row['kode_prodi'])
 				->setCellValue('E'.($no+1), $row['nama_prodi']);
     $no += 1;
 }
